@@ -1,0 +1,19 @@
+{
+    "name": "textagroup/firebase",
+    "description": "SilverStripe Firebase database adapter",
+    "type": "silverstripe-module",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Kirk Mayo",
+            "email": "textagroup@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+    "autoload": {
+        "psr-4": {
+            "Textagroup\\SilverStripe\\Firebase\\": "code/"
+        }
+    }
+}
