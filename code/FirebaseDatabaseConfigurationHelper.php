@@ -17,7 +17,6 @@ use PDO;
  */
 class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
 {
-    public static $foo = 'bar';
     /**
      * Create a connection of the appropriate type
      *

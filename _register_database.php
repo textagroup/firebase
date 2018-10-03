@@ -2,8 +2,8 @@
 
 
 use SilverStripe\Dev\Install\DatabaseAdapterRegistry;
-use SilverStripe\Firebase\FirebaseConfigurationHelper;
-use SilverStripe\Firebase\FirebaseDatabaseAdapterRegistry;
+use Textagroup\SilverStripe\Firebase\FirebaseConfigurationHelper;
+use Textagroup\SilverStripe\Firebase\FirebaseDatabaseAdapterRegistry;
 
 
 // Firebase database
