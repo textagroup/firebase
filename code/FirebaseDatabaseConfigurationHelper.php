@@ -41,8 +41,9 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
                     $conn = (new Factory)
                         ->withServiceAccount($serviceAccount)
                         ->create();
-$existingDatabases= $conn->getDatabase();
-var_dump($serviceAccount); exit;
+                    $database  = $conn->getDatabase();
+// TODO can not be hard coded
+                    $exists = $database->getReference('silverstripe-3e408');
                     break;
                 default:
                     $error = 'Invalid connection type: ' . $databaseConfig['type'];
@@ -52,7 +53,7 @@ var_dump($serviceAccount); exit;
             $error = $ex->getMessage();
             return null;
         }
-        if ($conn) {
+        if ($exists) {
             return $conn;
         } else {
             $error = 'Firebase requires a valid username and password to determine if the server exists.';
@@ -162,14 +163,25 @@ var_dump($serviceAccount); exit;
         $conn = $this->createConnection($databaseConfig, $error);
         if ($conn) {
             // Check if db already exists
-            $database = $firebase->getDatabase();
-            $alreadyExists = in_array($databaseConfig['database'], $existingDatabases);
+            $database = $conn->getDatabase();
+//TODO removed hardcoded string`
+            $reference = $database->getReference('silverstripe-3e408');
+            $alreadyExists = $reference->getValue();
             if ($alreadyExists) {
                 $success = true;
             } else {
                 // Check if this user has create privileges
-                $allowedUsers = $this->query($conn, "select rolname from pg_authid where rolcreatedb = true;");
-                $success = in_array($databaseConfig['username'], $allowedUsers);
+//TODO removed hardcoded string`
+                $reference
+                   ->set([
+                       'name' => 'My Application',
+                       'emails' => [
+                           'support' => 'support@domain.tld',
+                           'sales' => 'sales@domain.tld',
+                       ],
+                       'website' => 'https://app.domain.tld',
+                  ]);
+                    $success = true;
             }
         }
 
