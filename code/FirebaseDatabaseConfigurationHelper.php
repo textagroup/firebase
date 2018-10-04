@@ -89,46 +89,20 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
 
     public function getDatabaseVersion($databaseConfig)
     {
-        $conn = $this->createConnection($databaseConfig, $error);
-        if (!$conn) {
-            return false;
-        } elseif (is_resource($conn)) {
-            $info = pg_version($conn);
-            return $info['server'];
-        } else {
-            return false;
-        }
+        return true;
     }
 
     /**
-     * Ensure that the PostgreSQL version is at least 8.3.
+     * May not be needed for Firebase
      *
      * @param array $databaseConfig Associative array of db configuration, e.g. "server", "username" etc
      * @return array Result - e.g. array('success' => true, 'error' => 'details of error')
      */
     public function requireDatabaseVersion($databaseConfig)
     {
-// TODO do something useful
         return array(
             'success' => true,
             'error' => ''
-        );
-        $success = false;
-        $error = '';
-        $version = $this->getDatabaseVersion($databaseConfig);
-
-        if ($version) {
-            $success = version_compare($version, '8.3', '>=');
-            if (!$success) {
-                $error = "Your PostgreSQL version is $version. It's recommended you use at least 8.3.";
-            }
-        } else {
-            $error = "Your PostgreSQL version could not be determined.";
-        }
-
-        return array(
-            'success' => $success,
-            'error' => $error
         );
     }
 
@@ -141,6 +115,7 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
      */
     protected function query($conn, $sql)
     {
+// TODO
     }
 
     public function requireDatabaseOrCreatePermissions($databaseConfig)
