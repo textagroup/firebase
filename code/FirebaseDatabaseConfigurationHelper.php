@@ -7,7 +7,6 @@ use SilverStripe\Dev\Install\DatabaseConfigurationHelper;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Exception;
-use PDO;
 
 /**
  * This is a helper class for the SS installer.
@@ -142,18 +141,6 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
      */
     protected function query($conn, $sql)
     {
-        $items = array();
-        if ($conn instanceof PDO) {
-            foreach ($conn->query($sql) as $row) {
-                $items[] = $row[0];
-            }
-        } elseif (is_resource($conn)) {
-            $result =  pg_query($conn, $sql);
-            while ($row = pg_fetch_row($result)) {
-                $items[] = $row[0];
-            }
-        }
-        return $items;
     }
 
     public function requireDatabaseOrCreatePermissions($databaseConfig)
