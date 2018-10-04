@@ -9,6 +9,9 @@
             "email": "textagroup@gmail.com"
         }
     ],
+    "require": {
+        "kreait/firebase-php": "^3.0"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
