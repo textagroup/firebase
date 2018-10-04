@@ -3,17 +3,24 @@
 
 use SilverStripe\Dev\Install\DatabaseAdapterRegistry;
 use Textagroup\SilverStripe\Firebase\FirebaseConfigurationHelper;
-use Textagroup\SilverStripe\Firebase\FirebaseDatabaseAdapterRegistry;
 
+$fields = array(
+    'apiKey' => array(
+        'title' => 'Service Account JSON',
+        'envVar' => 'SS_FIREBASE_SERVICE_ACCOUNT_JSON',
+        'default' => ''
+    )
+);
 
 // Firebase database
-FirebaseDatabaseAdapterRegistry::register(array(
-    'class' => 'FirebaseDatabase',
+DatabaseAdapterRegistry::register(array(
+    'class' => 'Firebase',
     'module' => 'framework',
     'title' => 'Firebase',
     'helperPath' => __DIR__.'/code/FirebaseDatabaseConfigurationHelper.php',
     'helperClass' => FirebaseConfigurationHelper::class,
     'supported' => (class_exists('Kreait\Firebase')),
     'missingExtensionText' =>
-		'Missing Firebase library'
+		'Missing Firebase library',
+    'fields' => $fields
 ));

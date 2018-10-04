@@ -2,8 +2,10 @@
 
 namespace Textagroup\SilverStripe\Firebase;
 
-use SilverStripe\Firebase\FirebaseDatabaseAdapterRegistry;
+use SilverStripe\Dev\Install\DatabaseAdapterRegistry;
 use SilverStripe\Dev\Install\DatabaseConfigurationHelper;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
 use Exception;
 use PDO;
 
@@ -30,15 +32,15 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
         $error = null;
         $username = empty($databaseConfig['username']) ? '' : $databaseConfig['username'];
         $password = empty($databaseConfig['password']) ? '' : $databaseConfig['password'];
-        $server = $databaseConfig['server'];
 
         try {
             switch ($databaseConfig['type']) {
                 case 'Firebase':
-                    $userPart = $username ? " user=$username" : '';
-                    $passwordPart = $password ? " password=$password" : '';
-                    $connstring = "host=$server port=5432 dbname=postgres{$userPart}{$passwordPart}";
-                    $conn = pg_connect($connstring);
+// TODO use env variable
+                    $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/../../../../silverstripe-3e408-firebase-adminsdk-p0p5z-9b2ffec335.json');
+                    $conn = (new Factory)
+                        ->withServiceAccount($serviceAccount)
+                        ->create();
                     break;
                 default:
                     $error = 'Invalid connection type: ' . $databaseConfig['type'];
@@ -58,7 +60,7 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
 
     public function requireDatabaseFunctions($databaseConfig)
     {
-        $data = FirebaseDatabaseAdapterRegistry::get_adapter($databaseConfig['type']);
+        $data = DatabaseAdapterRegistry::get_adapter($databaseConfig['type']);
         return !empty($data['supported']);
     }
 
@@ -153,9 +155,12 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
 
     public function requireDatabaseOrCreatePermissions($databaseConfig)
     {
+return false;
         $success = false;
         $alreadyExists = false;
         $conn = $this->createConnection($databaseConfig, $error);
+// TODO
+/*
         if ($conn) {
             // Check if db already exists
             $existingDatabases = $this->query($conn, "SELECT datname FROM pg_database");
@@ -168,6 +173,9 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
                 $success = in_array($databaseConfig['username'], $allowedUsers);
             }
         }
+*/
+$success = true;
+$alreadyExists = true;
 
         return array(
             'success' => $success,
