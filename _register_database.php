@@ -14,7 +14,7 @@ $fields = array(
 
 // Firebase database
 DatabaseAdapterRegistry::register(array(
-    'class' => 'Firebase',
+    'class' => 'FirebaseDatabase',
     'module' => 'framework',
     'title' => 'Firebase',
     'helperPath' => __DIR__.'/code/FirebaseDatabaseConfigurationHelper.php',
