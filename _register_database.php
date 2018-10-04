@@ -21,6 +21,5 @@ DatabaseAdapterRegistry::register(array(
     'helperClass' => FirebaseConfigurationHelper::class,
     'supported' => (class_exists('Kreait\Firebase')),
     'missingExtensionText' =>
-		'Missing Firebase library',
-    'fields' => $fields
+		'Missing Firebase library'
 ));

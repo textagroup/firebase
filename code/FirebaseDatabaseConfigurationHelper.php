@@ -41,6 +41,8 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
                     $conn = (new Factory)
                         ->withServiceAccount($serviceAccount)
                         ->create();
+$existingDatabases= $conn->getDatabase();
+var_dump($serviceAccount); exit;
                     break;
                 default:
                     $error = 'Invalid connection type: ' . $databaseConfig['type'];
@@ -155,15 +157,12 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
 
     public function requireDatabaseOrCreatePermissions($databaseConfig)
     {
-return false;
         $success = false;
         $alreadyExists = false;
         $conn = $this->createConnection($databaseConfig, $error);
-// TODO
-/*
         if ($conn) {
             // Check if db already exists
-            $existingDatabases = $this->query($conn, "SELECT datname FROM pg_database");
+            $database = $firebase->getDatabase();
             $alreadyExists = in_array($databaseConfig['database'], $existingDatabases);
             if ($alreadyExists) {
                 $success = true;
@@ -173,9 +172,6 @@ return false;
                 $success = in_array($databaseConfig['username'], $allowedUsers);
             }
         }
-*/
-$success = true;
-$alreadyExists = true;
 
         return array(
             'success' => $success,
