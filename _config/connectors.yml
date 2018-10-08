@@ -2,22 +2,16 @@
 name: firebaselconnectors
 ---
 SilverStripe\Core\Injector\Injector:
-  FirebasePDODatabase:
-    class: 'SilverStripe\Firebase\FirebaseDatabase'
-    properties:
-      connector: '%$PDOConnector'
-      schemaManager: '%$FirebaseSchemaManager'
-      queryBuilder: '%$FirebaseQueryBuilder'
   FirebaseDatabase:
-    class: 'SilverStripe\Firebase\FirebaseDatabase'
+    class: 'TextaGroup\SilverStripe\Firebase\FirebaseDatabase'
     properties:
       connector: '%$FirebaseConnector'
       schemaManager: '%$FirebaseSchemaManager'
       queryBuilder: '%$FirebaseQueryBuilder'
   FirebaseConnector:
-    class: 'SilverStripe\Firebase\FirebaseConnector'
+    class: 'Textagroup\SilverStripe\Firebase\FirebaseConnector'
     type: prototype
   FirebaseSchemaManager:
-    class: 'SilverStripe\Firebase\FirebaseSchemaManager'
+    class: 'Textagroup\SilverStripe\Firebase\FirebaseSchemaManager'
   FirebaseQueryBuilder:
-    class: 'SilverStripe\Firebase\FirebaseQueryBuilder'
+    class: 'Textagroup\SilverStripe\Firebase\FirebaseQueryBuilder'

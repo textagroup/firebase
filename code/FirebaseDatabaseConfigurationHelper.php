@@ -34,7 +34,7 @@ class FirebaseConfigurationHelper implements DatabaseConfigurationHelper
 
         try {
             switch ($databaseConfig['type']) {
-                case 'Firebase':
+                case 'FirebaseDatabase':
 // TODO use env variable
                     $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/../../../../silverstripe-3e408-firebase-adminsdk-p0p5z-9b2ffec335.json');
                     $conn = (new Factory)

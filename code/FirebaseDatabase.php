@@ -11,6 +11,7 @@ use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\Queries\SQLSelect;
+use SilverStripe\ORM\Connect\Database;
 use Exception;
 
 /**
@@ -134,7 +135,7 @@ class FirebaseDatabase extends Database
 
     public function getDatabaseServer()
     {
-        return "mysql";
+        return "firebase";
     }
 
     /**
